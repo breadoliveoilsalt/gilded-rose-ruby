@@ -45,12 +45,9 @@ class GildedRose
         next
       end
 
-      if item.sell_in > 0
-        item.quality = [0, item.quality - 1].max
-      else
-        item.quality = [0, item.quality - 2].max
-      end
-      item.sell_in = item.sell_in - 1
+      updater = DefaultUpdater.new(item)
+      updater.update_item_quality
+      updater.update_item_sell_in
 
     end
   end
@@ -68,4 +65,24 @@ class Item
   def to_s()
     "#{@name}, #{@sell_in}, #{@quality}"
   end
+end
+
+class DefaultUpdater
+
+  def initialize(item)
+    @item = item
+  end
+
+  def update_item_quality
+      if @item.sell_in > 0
+        @item.quality = [0, @item.quality - 1].max
+      else
+        @item.quality = [0, @item.quality - 2].max
+      end
+  end
+
+  def update_item_sell_in
+      @item.sell_in = @item.sell_in - 1
+  end
+
 end
