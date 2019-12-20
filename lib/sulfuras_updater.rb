@@ -1,3 +1,5 @@
+require_relative './default_updater.rb'
+
 class SulfurasUpdater < DefaultUpdater
 
   def initialize(item)
