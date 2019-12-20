@@ -1,3 +1,6 @@
+require_relative './default_updater.rb'
+require_relative './sulfuras_updater.rb'
+
 class GildedRose
 
   def initialize(items)
@@ -56,20 +59,6 @@ class GildedRose
   end
 end
 
-class Item
-  attr_accessor :name, :sell_in, :quality
-
-  def initialize(name, sell_in, quality)
-    @name = name
-    @sell_in = sell_in
-    @quality = quality
-  end
-
-  def to_s()
-    "#{@name}, #{@sell_in}, #{@quality}"
-  end
-end
-
 class UpdaterFactory
 
   def self.get_updater(item) 
@@ -81,41 +70,6 @@ class UpdaterFactory
       DefaultUpdater(item)
     end
 
-  end
-
-end
-
-
-class DefaultUpdater
-
-  def initialize(item)
-    @item = item
-  end
-
-  def update_item_quality
-      if @item.sell_in > 0
-        @item.quality = [0, @item.quality - 1].max
-      else
-        @item.quality = [0, @item.quality - 2].max
-      end
-  end
-
-  def update_item_sell_in
-      @item.sell_in = @item.sell_in - 1
-  end
-
-end
-
-class SulfurasUpdater < DefaultUpdater
-
-  def initialize(item)
-    @item = item
-  end
-
-  def update_item_quality
-  end
-
-  def update_item_sell_in
   end
 
 end
