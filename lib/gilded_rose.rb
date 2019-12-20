@@ -6,49 +6,52 @@ class GildedRose
 
   def update_quality()
     @items.each do |item|
-      if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
-        if item.quality > 0
-          if item.name != "Sulfuras, Hand of Ragnaros"
-            item.quality = item.quality - 1
-          end
-        end
-      else
-        if item.quality < 50
-          item.quality = item.quality + 1
-          if item.name == "Backstage passes to a TAFKAL80ETC concert"
-            if item.sell_in < 11
-              if item.quality < 50
-                item.quality = item.quality + 1
-              end
-            end
-            if item.sell_in < 6
-              if item.quality < 50
-                item.quality = item.quality + 1
-              end
-            end
-          end
-        end
+        
+      if item.name == "Sulfuras, Hand of Ragnaros"
+        next
       end
-      if item.name != "Sulfuras, Hand of Ragnaros"
-        item.sell_in = item.sell_in - 1
-      end
-      if item.sell_in < 0
-        if item.name != "Aged Brie"
-          if item.name != "Backstage passes to a TAFKAL80ETC concert"
-            if item.quality > 0
-              if item.name != "Sulfuras, Hand of Ragnaros"
-                item.quality = item.quality - 1
-              end
-            end
-          else
-            item.quality = item.quality - item.quality
-          end
+
+      if item.name == "Aged Brie"
+        if item.sell_in > 0
+          item.quality = [50, item.quality + 1].min
         else
-          if item.quality < 50
-            item.quality = item.quality + 1
-          end
+          item.quality = [50, item.quality + 2].min
         end
+        item.sell_in = item.sell_in - 1
+        next
       end
+
+      if item.name == "Backstage passes to a TAFKAL80ETC concert"
+        if item.sell_in > 10
+          item.quality = [50, item.quality + 1].min
+        elsif item.sell_in > 5
+          item.quality = [50, item.quality + 2].min
+        elsif item.sell_in > 0
+          item.quality = [50, item.quality + 3].min
+        else
+          item.quality = 0
+        end
+        item.sell_in = item.sell_in - 1
+        next
+      end
+
+      if item.name == "Conjured Item"
+        if item.sell_in > 0
+          item.quality = [0, item.quality - 2].max
+        else
+          item.quality = [0, item.quality - 4].max
+        end
+        item.sell_in = item.sell_in - 1
+        next
+      end
+
+      if item.sell_in > 0
+        item.quality = [0, item.quality - 1].max
+      else
+        item.quality = [0, item.quality - 2].max
+      end
+      item.sell_in = item.sell_in - 1
+
     end
   end
 end
