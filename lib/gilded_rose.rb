@@ -8,6 +8,9 @@ class GildedRose
     @items.each do |item|
         
       if item.name == "Sulfuras, Hand of Ragnaros"
+        updater = SulfurasUpdater.new(item)
+        updater.update_item_quality
+        updater.update_item_sell_in
         next
       end
 
@@ -67,6 +70,22 @@ class Item
   end
 end
 
+class UpdaterFactory
+
+  def self.get_updater(item) 
+
+    case item.name
+    when "Sulfuras, Hand of Ragnaros"
+      SulfurasUpdater.new(item)
+    else
+      DefaultUpdater(item)
+    end
+
+  end
+
+end
+
+
 class DefaultUpdater
 
   def initialize(item)
@@ -83,6 +102,20 @@ class DefaultUpdater
 
   def update_item_sell_in
       @item.sell_in = @item.sell_in - 1
+  end
+
+end
+
+class SulfurasUpdater < DefaultUpdater
+
+  def initialize(item)
+    @item = item
+  end
+
+  def update_item_quality
+  end
+
+  def update_item_sell_in
   end
 
 end
