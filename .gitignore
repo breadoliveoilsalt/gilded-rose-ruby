@@ -1,0 +1,7 @@
+### In General ###
+scraps*
+
+### Ruby ###
+*.swp
+*.swo
+.bundle
