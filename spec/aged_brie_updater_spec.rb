@@ -1,9 +1,9 @@
-require_relative '../lib/aged_brie.rb'
+require_relative '../lib/item.rb'
 require_relative '../lib/aged_brie_updater.rb'
 
 describe AgedBrieUpdater do
 
-  it "requires an aged_brie when initialized" do
+  it "requires an item when initialized" do
 
     expect{AgedBrieUpdater.new}.to raise_error(ArgumentError)
 
@@ -41,9 +41,9 @@ describe AgedBrieUpdater do
       
     it "does not increase the quality of Aged Brie beyond 50" do
       brie_1 = Item.new("Aged Brie", 10, 50)
-      updater_1 = AgedBrieUpdater.new(aged_brie_1)
+      updater_1 = AgedBrieUpdater.new(brie_1)
       brie_2 = Item.new("Aged Brie", -10, 49) 
-      updater_2 = AgedBrieUpdater.new(aged_brie_2)
+      updater_2 = AgedBrieUpdater.new(brie_2)
 
       updater_1.update_item_quality
       updater_2.update_item_quality
@@ -51,6 +51,8 @@ describe AgedBrieUpdater do
       expect(brie_1.quality).to eq 50
       expect(brie_2.quality).to eq 50
     end
+
+  end
 
   describe "#update_item_sell_in" do
 
@@ -60,7 +62,7 @@ describe AgedBrieUpdater do
 
       updater.update_item_sell_in
 
-      expect(aged_brie.sell_in).to eq 9
+      expect(brie.sell_in).to eq 9
     end
 
   end
