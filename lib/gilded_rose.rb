@@ -11,9 +11,6 @@ class GildedRose
     @items.each do |item|
       item.set_update_strategy(specialized_update_strategies[item.name] || default_strategy)
       item.update
-      # updater = UpdaterFactory.get_updater(item)
-      # updater.update_item_quality
-      # updater.update_item_sell_in
     end
   end
 
@@ -23,10 +20,10 @@ class GildedRose
 
   def specialized_update_strategies
     {
-      "Sulfuras, Hand of Ragnaros" => ItemUpdateStrategies::SulfurasStragegy.new,
+      "Sulfuras, Hand of Ragnaros" => ItemUpdateStrategies::SulfurasStrategy.new,
       "Aged Brie" => ItemUpdateStrategies::BrieStrategy.new,
       "Backstage passes to a TAFKAL80ETC concert" => ItemUpdateStrategies::BackstagePassStrategy.new,
-      "Conjured Item" => ItemUpdateStrategies::ConjuredItemStragegy.new
+      "Conjured Item" => ItemUpdateStrategies::ConjuredItemStrategy.new
     }
   end
 

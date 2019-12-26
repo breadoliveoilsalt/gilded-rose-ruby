@@ -13,7 +13,7 @@ module ItemUpdateStrategies
 
   end
 
-  class SulfurasStragegy
+  class SulfurasStrategy
 
     def update(item)
     end
@@ -50,7 +50,7 @@ module ItemUpdateStrategies
 
   end
 
-  class ConjuredItemStragegy
+  class ConjuredItemStrategy
     
     def update(item)
       if item.sell_in > 0
