@@ -13,11 +13,11 @@ class Item
   end
   
   def update
-    @update_strategy.update
+    @update_strategy.update(self)
   end
 
   def set_update_strategy(update_strategy)
-    @update_stragegy = update_stragegy
+    @update_strategy = update_strategy
   end
-  
+
 end
