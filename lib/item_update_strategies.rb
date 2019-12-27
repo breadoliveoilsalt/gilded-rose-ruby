@@ -20,7 +20,7 @@ module ItemUpdateStrategies
 
   end
 
-  class BrieStrategy
+  class AgedBrieStrategy
     
     def update(item)
       if item.sell_in > 0
