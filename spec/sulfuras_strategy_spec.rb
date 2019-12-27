@@ -16,9 +16,9 @@ describe ItemUpdateStrategies::SulfurasStrategy do
   
     it "does not lower the item's sell_in date" do
       sulfuras = Item.new("Sulfuras, Hand of Ragnaros", 10, 80)
-      sulfuras.set_update_strategy(ItemUpdateStrategies::SulfurasStrategy.new)
+      strategy = ItemUpdateStrategies::SulfurasStrategy.new
 
-      sulfuras.update
+      strategy.update(sulfuras)
 
       expect(sulfuras.sell_in).to eq 10
     end
