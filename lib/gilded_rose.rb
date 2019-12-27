@@ -1,4 +1,3 @@
-require_relative './updater_factory.rb'
 require_relative './item_update_strategies.rb'
 
 class GildedRose
